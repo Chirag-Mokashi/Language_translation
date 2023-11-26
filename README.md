@@ -35,7 +35,7 @@ Training Steps
   Optimizer: Select an optimizer (e.g., Adam) with the specified learning rate and weight decay.
   Training Loop: Iterate through 20 epochs, compute loss, and backpropagate.
 
-## Reults
+## Results
 # Metrics:
   BLEU Score: Measure of translation quality.
 The overall BLEU score of 36.62 indicates the quality of the machine translation output when compared to the reference translation(s). The BLEU score is a metric commonly used for evaluating the performance of machine translation systems. It ranges from 0 to 100, where a higher score indicates better translation quality.
