@@ -43,9 +43,13 @@ The overall BLEU score of 36.62 indicates the quality of the machine translation
 In general, BLEU scores are interpreted as follows:
 
 0-19: Low-quality translation
+
 20-29: Acceptable translation
+
 30-39: Good translation
+
 40-49: Very good translation
+
 50+: Excellent translation
 
 # Conclusion
@@ -60,6 +64,7 @@ Interpretation:
 
 Considerations:
 3.While BLEU provides a quantitative measure, it's crucial to supplement it with qualitative analysis and domain-specific evaluations.
+
 4.Assess how well the translations meet the specific needs and expectations of the intended audience or application.
 
 
