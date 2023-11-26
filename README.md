@@ -76,6 +76,7 @@ Interpretation:
 
 Considerations:
 
+
 3.While BLEU provides a quantitative measure, it's crucial to supplement it with qualitative analysis and domain-specific evaluations.
 
 4.Assess how well the translations meet the specific needs and expectations of the intended audience or application.
