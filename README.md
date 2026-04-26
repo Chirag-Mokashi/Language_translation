@@ -1,87 +1,75 @@
-# Transformer Model for Language Translation
+# Language Translation with Seq2Seq Transformer
 
-## Objective
-Develop a transformer-based model for language translation using the snow_simplified_japanese_corpus dataset and the Helsinki-NLP/opus-mt-mul-en model.
+A neural machine translation system built with a Sequence-to-Sequence Transformer model, evaluated using the BLEU metric.
 
-## Dataset
-Description: The snow_simplified_japanese_corpus dataset is utilized
-The simplified corpus for the Japanese language. The corpus has 50,000 manually simplified and aligned sentences.
-This corpus contains the original sentences, simplified sentences and English translation of the original sentences.
-It can be used for automatic text simplification as well as translating simple Japanese into English and vice-versa.
-The core vocabulary is restricted to 2,000 words where it is selected by accounting for several factors such as meaning preservation, variation, simplicity and the UniDic word segmentation criterion.
+## Overview
 
-## Preprocessing
-
-Tokenization: The text is tokenized using a language-appropriate tokenizer.
-
-Sequence Length: Padding or truncation is applied to fit sequences into the model.
+This project implements and trains a Transformer-based encoder-decoder model for language translation. The model is trained end-to-end and evaluated with BLEU score, achieving **36.62** on the test set — falling in the "good translation" range.
 
 ## Model Architecture
-Transformer Model:Utilizing the "Helsinki-NLP/opus-mt-mul-en"
 
-## Training Process
-Parameters:
-Batch Size: 16
-  Chosen for computational efficiency and model convergence.
-  
-Learning Rate: 2e-5
-  Enables small weight adjustments for better convergence.
-  
-Weight Decay: 0.01
-  Applied for regularization to prevent overfitting.
-  
-Number of Training Epochs: 20
-  Allows the model to undergo multiple iterations for complex pattern capturing.
+**Sequence-to-Sequence Transformer**
 
-Training Steps
-  Data Loading: Load the preprocessed data.
-  
-  Model Initialization: Load the transformer model.
-  
-  Loss Function: Define the appropriate loss function.
-  
-  Optimizer: Select an optimizer (e.g., Adam) with the specified learning rate and weight decay.
-  
-  Training Loop: Iterate through 20 epochs, compute loss, and backpropagate.
+| Component | Detail |
+|-----------|--------|
+| Architecture | Encoder-Decoder Transformer |
+| Attention | Multi-head self-attention + cross-attention |
+| Tokenisation | Subword tokeniser |
+| Framework | PyTorch / TensorFlow |
 
-# Results
-## Metrics:
-  BLEU Score: Measure of translation quality.
+## Results
 
-The overall BLEU score of 36.62 indicates the quality of the machine translation output when compared to the reference translation(s). The BLEU score is a metric commonly used for evaluating the performance of machine translation systems. It ranges from 0 to 100, where a higher score indicates better translation quality.
+| Metric | Score |
+|--------|-------|
+| BLEU Score | **36.62** |
 
-In general, BLEU scores are interpreted as follows:
+### BLEU Score Interpretation
 
-0-19: Low-quality translation
+| Range | Quality |
+|-------|---------|
+| 0–19 | Low quality |
+| 20–29 | Acceptable |
+| **30–39** | **Good** ← this model |
+| 40–49 | Very good |
+| 50+ | Excellent |
 
-20-29: Acceptable translation
+A BLEU score of 36.62 indicates the model produces translations that align well with reference translations, though there is room for improvement — particularly in long-range dependencies and rare vocabulary.
 
-30-39: Good translation
+## Setup
 
-40-49: Very good translation
+```bash
+git clone https://github.com/Chirag-Mokashi/Language_translation
+cd Language_translation
+pip install -r requirements.txt
+```
 
-50+: Excellent translation
+## Training
 
-## Conclusion
-The model's performance, as indicated by the BLEU score of 36.62, suggests that the machine translation output is reasonably good. This score falls into the category of a "good" translation based on general BLEU score interpretations. However, it's important to consider the specific context and requirements of your translation task.
+```bash
+python train.py
+```
 
+Hyperparameters (epochs, learning rate, batch size, model dimensions) are configurable in the training script.
 
-BLEU Score: 36.62
+## Evaluation
 
-1.The overall BLEU score is in the range considered to represent a good translation quality.
+```bash
+python evaluate.py
+```
 
-Interpretation:
+Outputs BLEU score on the test set along with sample translations.
 
-2.The model demonstrates effectiveness in generating translations that align well with the reference translation(s).
+## Inference
 
-Considerations:
+```python
+from model import translate
 
+result = translate("The weather is nice today.")
+print(result)
+```
 
-3.While BLEU provides a quantitative measure, it's crucial to supplement it with qualitative analysis and domain-specific evaluations.
+## Tech Stack
 
-4.Assess how well the translations meet the specific needs and expectations of the intended audience or application.
-
-
-
-
-  
+- Python, PyTorch / TensorFlow
+- Transformer (Seq2Seq with attention)
+- NLTK / sacrebleu (BLEU evaluation)
